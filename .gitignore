@@ -1,0 +1,10 @@
+# Python 3 bytecode
+__pycache__
+
+# virtual environment
+venv
+
+# cache data
+.cache
+.mypy_cache
+.pytest_cache
