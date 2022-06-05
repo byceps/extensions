@@ -23,8 +23,8 @@ Installation
 
       <li><a class="dropdown-item" href="{{ url_for('.export', order_id=order.id) }}" download="{{ order.order_number }}.xml">{{ render_icon('download') }} {{ _('Export for Lexware (XML)') }}</a></li>
 
-- Finally restart the application.
+- Finally, restart the application.
 
 If successful, you should see a new item to export the order in the
 actions dropdown of the single order view in the shop administration.
-After selecting it, an XML file should be offered for dowload.
+After selecting it, an XML file should be offered for download.
