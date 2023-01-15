@@ -12,4 +12,4 @@ Available in this repository:
 Available elsewhere:
 
 - `LANresort bungalow contest
-  <https://github.com/lanresort/bungalowcontest>`_
+  <https://github.com/lanresort/byceps-bungalowcontest>`_
