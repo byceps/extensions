@@ -11,5 +11,7 @@ Available in this repository:
 
 Available elsewhere:
 
+- `LANresort bungalows system
+  <https://github.com/lanresort/byceps-bungalows>`_
 - `LANresort bungalow contest
   <https://github.com/lanresort/byceps-bungalowcontest>`_
