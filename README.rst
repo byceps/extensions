@@ -15,3 +15,6 @@ Available elsewhere:
   <https://github.com/lanresort/byceps-bungalows>`_
 - `LANresort bungalow contest
   <https://github.com/lanresort/byceps-bungalowcontest>`_
+- `Whereabouts
+  <https://github.com/lanresort/byceps-whereabouts>`_ as a Verbleiber
+  backend
