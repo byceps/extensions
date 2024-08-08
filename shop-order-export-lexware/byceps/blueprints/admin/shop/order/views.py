@@ -2,13 +2,13 @@
 byceps.blueprints.admin.shop.order.views
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:Copyright: 2014-2022 Jochen Kupperschmidt
+:Copyright: 2014-2024 Jochen Kupperschmidt
 :License: Revised BSD (see `LICENSE` file for details)
 """
 
 from flask import Response
 
-from .....services.shop.order.export import service as order_export_service
+from byceps.services.shop.order.export import order_export_service
 
 
 # -------------------------------------------------------------------- #

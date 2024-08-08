@@ -40,7 +40,7 @@
 						</PARTY>
 					</INVOICE_PARTY>
 				</ORDER_PARTIES>
-				<PRICE_CURRENCY>EUR</PRICE_CURRENCY>
+				<PRICE_CURRENCY>{{ order.total_amount.currency.code }}</PRICE_CURRENCY>
 				<PAYMENT>
 					<CASH>
 						<PAYMENT_TERM type="unece">10</PAYMENT_TERM>
@@ -50,27 +50,27 @@
 			</ORDER_INFO>
 		</ORDER_HEADER>
 		<ORDER_ITEM_LIST>
-        {%- for line_item in line_items|sort(attribute='article_number') %}
+		{%- for line_item in line_items|sort(attribute='article_number') %}
 			<ORDER_ITEM>
 				<LINE_ITEM_ID>{{ loop.index0 }}</LINE_ITEM_ID>
 				<ARTICLE_ID>
 					<SUPPLIER_AID>{{ line_item.article_number }}</SUPPLIER_AID>
-					<DESCRIPTION_SHORT>{{ line_item.description }}</DESCRIPTION_SHORT>
+					<DESCRIPTION_SHORT>{{ line_item.name }}</DESCRIPTION_SHORT>
 					<DESCRIPTION_LONG></DESCRIPTION_LONG>
 				</ARTICLE_ID>
 				<QUANTITY>{{ line_item.quantity }}</QUANTITY>
 				<ORDER_UNIT>1</ORDER_UNIT>
 				<ARTICLE_PRICE type="gros_list">
-					<PRICE_AMOUNT>{{ format_export_amount(line_item.unit_price) }}</PRICE_AMOUNT>
-					<PRICE_LINE_AMOUNT>{{ format_export_amount(line_item.line_amount) }}</PRICE_LINE_AMOUNT>
+					<PRICE_AMOUNT>{{ format_export_amount(line_item.unit_price.amount) }}</PRICE_AMOUNT>
+					<PRICE_LINE_AMOUNT>{{ format_export_amount(line_item.line_amount.amount) }}</PRICE_LINE_AMOUNT>
 					<TAX>{{ '%0.2f'|format(line_item.tax_rate) }}</TAX>
 				</ARTICLE_PRICE>
 			</ORDER_ITEM>
-        {%- endfor %}
+		{%- endfor %}
 		</ORDER_ITEM_LIST>
 		<ORDER_SUMMARY>
 			<TOTAL_ITEM_NUM>{{ line_items|length }}</TOTAL_ITEM_NUM>
-			<TOTAL_AMOUNT>{{ format_export_amount(order.total_amount) }}</TOTAL_AMOUNT>
+			<TOTAL_AMOUNT>{{ format_export_amount(order.total_amount.amount) }}</TOTAL_AMOUNT>
 		</ORDER_SUMMARY>
 	</ORDER>
 </ORDER_LIST>

@@ -1,27 +1,26 @@
 """
-byceps.services.shop.order.export.service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+byceps.services.shop.order.export.order_export_service
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:Copyright: 2014-2022 Jochen Kupperschmidt
+:Copyright: 2014-2024 Jochen Kupperschmidt
 :License: Revised BSD (see `LICENSE` file for details)
 """
 
-from __future__ import annotations
-from datetime import datetime, timezone
+from datetime import datetime, UTC
 from decimal import Decimal
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 from flask import current_app
 
-from .....services.user import service as user_service
-from .....util.templating import load_template
+from byceps.services.shop.order import order_service
+from byceps.services.shop.order.models.detailed_order import DetailedOrder
+from byceps.services.shop.order.models.order import OrderID
+from byceps.services.user import user_service
+from byceps.util.templating import load_template
 
-from .. import service as order_service
-from ..transfer.order import Order, OrderID
 
-
-def export_order_as_xml(order_id: OrderID) -> Optional[dict[str, str]]:
+def export_order_as_xml(order_id: OrderID) -> dict[str, str] | None:
     """Export the order as an XML document."""
     order = order_service.find_order_with_details(order_id)
 
@@ -37,10 +36,9 @@ def export_order_as_xml(order_id: OrderID) -> Optional[dict[str, str]]:
     }
 
 
-def _assemble_context(order: Order) -> dict[str, Any]:
+def _assemble_context(order: DetailedOrder) -> dict[str, Any]:
     """Assemble template context."""
-    placed_by = user_service.get_user(order.placed_by_id)
-    email_address = user_service.get_email_address(placed_by.id)
+    email_address = user_service.get_email_address(order.placed_by.id)
 
     now = datetime.utcnow()
 
@@ -67,7 +65,7 @@ def _format_export_amount(amount: Decimal) -> str:
 def _format_export_datetime(dt: datetime) -> str:
     """Format date and time as required by the export format specification."""
     export_tz = ZoneInfo(current_app.config['SHOP_ORDER_EXPORT_TIMEZONE'])
-    dt_utc = dt.replace(tzinfo=timezone.utc)
+    dt_utc = dt.replace(tzinfo=UTC)
     dt_local = dt_utc.astimezone(export_tz)
     return dt_local.isoformat()
 
