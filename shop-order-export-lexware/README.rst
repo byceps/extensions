@@ -7,6 +7,13 @@ they can be imported into Lexware.
 This extension consists of a dedicated service and a view function.
 
 
+Note
+----
+
+This extension has been incorporated into BYCEPS and no longer needs to
+be integrated manually.
+
+
 Installation
 ------------
 
